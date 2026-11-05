@@ -61,6 +61,10 @@ namespace RestaurantApi.Data.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("INTEGER");
 
+                    b.Property<decimal>("TotalAmount")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.ToTable("Orders");

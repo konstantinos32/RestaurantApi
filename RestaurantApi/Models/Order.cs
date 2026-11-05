@@ -8,4 +8,5 @@ public class Order
      public OrderStatus Status {get; set;}= OrderStatus.Pending;
 
      public List<OrderItem> Items {get; set;}= new List<OrderItem>();
+     public decimal TotalAmount { get; set; }
 }

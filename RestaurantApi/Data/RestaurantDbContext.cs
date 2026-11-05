@@ -58,6 +58,10 @@ public class RestaurantDbContext : DbContext
     .Property(order => order.CreatedAt)
     .HasConversion(new DateTimeOffsetToBinaryConverter());
 
+    modelBuilder.Entity<Order>()
+    .Property(order => order.TotalAmount)
+    .HasPrecision(10, 2);
+
 
     }
 
