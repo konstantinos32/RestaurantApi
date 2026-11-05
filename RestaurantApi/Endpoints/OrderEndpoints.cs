@@ -71,15 +71,6 @@ public static class OrderEndpoints
             CreateOrderRequest request,
             RestaurantDbContext db) =>
         {
-            // An order must contain at least one item.
-            if (request.Items is null || request.Items.Count == 0)
-            {
-                return Results.BadRequest(new
-                {
-                    message = "An order must contain at least one item."
-                });
-            }
-
             // Reject duplicate menu item IDs in the same order.
             var hasDuplicateItems = request.Items
                 .GroupBy(item => item.MenuItemId)

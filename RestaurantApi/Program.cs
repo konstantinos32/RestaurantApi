@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using RestaurantApi.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddValidation();
 
 // Register the database context and configure SQLite as the database provider.
 builder.Services.AddDbContext<RestaurantDbContext>(options =>
