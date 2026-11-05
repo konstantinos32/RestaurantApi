@@ -1,9 +1,13 @@
 using RestaurantApi.Endpoints;
 using Microsoft.EntityFrameworkCore;
 using RestaurantApi.Data;
+using RestaurantApi.Errors;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddValidation();
+// Register standardized error responses and our global exception handler.
+builder.Services.AddProblemDetails();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 // Register the database context and configure SQLite as the database provider.
 builder.Services.AddDbContext<RestaurantDbContext>(options =>
@@ -13,6 +17,7 @@ builder.Services.AddDbContext<RestaurantDbContext>(options =>
 );
 
 var app = builder.Build();
+app.UseExceptionHandler();
 
 if (app.Environment.IsDevelopment())
 {
