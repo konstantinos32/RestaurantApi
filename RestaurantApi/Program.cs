@@ -1,3 +1,4 @@
+using Scalar.AspNetCore;
 using RestaurantApi.Endpoints;
 using Microsoft.EntityFrameworkCore;
 using RestaurantApi.Data;
@@ -5,6 +6,8 @@ using RestaurantApi.Errors;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddValidation();
+// Register OpenAPI document generation.
+builder.Services.AddOpenApi();
 // Register standardized error responses and our global exception handler.
 builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
@@ -28,7 +31,11 @@ if (app.Environment.IsDevelopment())
 
     await dbContext.Database.MigrateAsync();
 
-    await DbSeeder.SeedAsync(dbContext);
+        await DbSeeder.SeedAsync(dbContext);
+
+    // Expose the OpenAPI document and interactive Scalar UI in Development.
+    app.MapOpenApi();
+    app.MapScalarApiReference();
 }
 
 app.MapGet("/", () => "Hello World!");
