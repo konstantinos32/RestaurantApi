@@ -29,4 +29,5 @@ app.MapGet("/", () => "Hello World!");
 
 app.MapMenuEndpoints();
 app.MapOrderEndpoints();
+app.MapReportEndpoints();
 app.Run();
